@@ -1,3 +1,6 @@
 {
-    "type": "module"
+    "type": "module",
+    "dependencies": {
+        "unfluff": "^3.2.0"
+    }
 }
