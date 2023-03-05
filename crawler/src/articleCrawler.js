@@ -1,4 +1,4 @@
-import puppeteer, { executablePath } from "puppeteer";
+import puppeteer from "puppeteer";
 import fs from "fs";
 
 function getBrowser() {
@@ -8,23 +8,21 @@ function getBrowser() {
     "--disable-ipc-flooding-protection",
     "--disable-renderer-backgrounding",
     "--no-sandbox",
-    "--disable-setuid-sandbox",
     "--disable-blink-features=AutomationControlled",
   ];
 
   return puppeteer.launch({
-    executablePath: executablePath(),
     args,
     defaultViewport: null,
-    headless: true,
+    headless: false,
   });
 }
 
 async function getArticle() {
     const browser = await getBrowser();
-    const page = await browser.newPage();
+    const page = await browser.goto();
   
-    await page.goto('https://github.com/', {waitUntil: 'load'});
+    await page.goto('https://example.com/', {waitUntil: 'load'});
     const html = await page.content();
   
     fs.writeFile('articleToParse.html', html, (err) => {
