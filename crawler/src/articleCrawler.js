@@ -24,10 +24,10 @@ async function getArticle() {
     const browser = await getBrowser();
     const page = await browser.newPage();
   
-    await page.goto('https://github.com/', {waitUntil: 'load'});
+    await page.goto('https://techcrunch.com/2023/04/01/chatgpt-blocked-in-italy/', {timeout: 60000});
     const html = await page.content();
   
-    fs.writeFile('articleToParse.html', html, (err) => {
+    fs.writeFile('./content/article.html', html, (err) => {
       if (err) throw err;
     });
 
