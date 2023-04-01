@@ -10,8 +10,8 @@ const response = await axios.get(channel);
 const DOM = new JSDOM(response.data);
 const document = DOM.window.document;
 
-const urlElement = document.querySelector(lastPostSelectorContent);
-console.log(urlElement.textContent)
+const urlElement = document.querySelector(`${lastPostSelectorContent}:last-of-type`);
+console.log(urlElement.getAttribute("href"))
 
 
 
