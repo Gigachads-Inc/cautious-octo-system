@@ -24,7 +24,7 @@ async function getArticle() {
     const browser = await getBrowser();
     const page = await browser.newPage();
   
-    await page.goto('https://techcrunch.com/2023/04/01/chatgpt-blocked-in-italy/', {timeout: 60000});
+    await page.goto("https://techcrunch.com/2023/04/27/muslims-come-into-the-frame-in-southeast-asias-fintech-boom/", {waitUntil: 'load'});
     const html = await page.content();
   
     fs.writeFile('./content/article.html', html, (err) => {

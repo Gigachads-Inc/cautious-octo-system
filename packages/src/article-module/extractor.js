@@ -29,5 +29,5 @@ async function getContent() {
 };
 
 async function getTitle() {
-    return document.title
+  console.log(document.title)
 };

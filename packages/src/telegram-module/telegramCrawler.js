@@ -12,7 +12,3 @@ const document = DOM.window.document;
 
 const urlElement = document.querySelector(`${lastPostSelectorContent}:last-of-type`);
 console.log(urlElement.getAttribute("href"))
-
-
-
-
