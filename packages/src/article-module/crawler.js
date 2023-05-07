@@ -7,9 +7,6 @@ class TechCrunchCrawler{
     this.browser = null;
   }
 
-  /**
-   * The path of a folder where to save the HTML topic file
-   */
   location = '../../content'
   
   args = [
@@ -50,9 +47,6 @@ class TechCrunchCrawler{
     this.page = await this.browser.newPage();
   }
 
-  /**
-   * Iterates over the topic list
-   */
   async iterating() {
     for (let topic in this.topics) {
       await this.crawling(this.topics[topic], topic)

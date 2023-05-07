@@ -13,21 +13,38 @@ const document = DOM.window.document;
 
 const paragraphs = document.querySelectorAll('p');
 
-async function getMetaImage() {
-  const pattern = /<meta\s+property="og:image"\s+content="(.+?)"/i;
-  const match = HTML.match(pattern);
-  const imageUrl = match && match[1];
-  console.log(imageUrl); 
-};
-
-async function getContent() {
-  for (let i = 0; i < paragraphs.length; i++) {
-    let paragraph = paragraphs[i];
-    let text = paragraph.textContent;
-    console.log(text);
+class Extractor {
+  constructor() {
+    this.document = null;
+    this.DOM = null;
   }
+
+  async Setup() {
+    
+  }
+
+  async Stripping() {
+
+  }
+
+  async MetaImage() {
+    const pattern = /<meta\s+property="og:image"\s+content="(.+?)"/i;
+    const match = HTML.match(pattern);
+    const imageUrl = match && match[1];
+    return imageUrl
+  };
+
+  async Content() {
+    for (let i = 0; i < paragraphs.length; i++) {
+      let paragraph = paragraphs[i];
+      let text = paragraph.textContent;
+      console.log(text);
+    }
+  };
+
+  async Title() {
+    return(document.title)
+  };
+
 };
 
-async function getTitle() {
-  console.log(document.title)
-};
