@@ -1,6 +1,8 @@
 import fs from "fs";
 import { JSDOM } from "jsdom";
 
+
+// Wrap over the class so it can pass the pure document that is ready to be scraped
 const htmlPath = './content/article.html';
 
 const sourceHTML = fs.readFileSync(htmlPath, 'utf8');
