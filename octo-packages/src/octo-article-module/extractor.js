@@ -5,38 +5,30 @@ import { JSDOM } from "jsdom";
 // Wrap over the class so it can pass the pure document that is ready to be scraped
 const htmlPath = './content/article.html';
 
-const sourceHTML = fs.readFileSync(htmlPath, 'utf8');
-const scriptRegex = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
-
-const HTML = sourceHTML.replace(scriptRegex, "");
-const DOM = new JSDOM(HTML);
-
-const document = DOM.window.document;
-
-const paragraphs = document.querySelectorAll('p');
-
 class Extractor {
   constructor() {
     this.document = null;
-    this.DOM = null;
   }
 
-  async Setup() {
-    
+  htmlPath = './content/article.html'; 
+
+  async setup() {
+    const sourceHTML = fs.readFileSync(htmlPath, 'utf8');
+    const pattern = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/i;
+    const HTML = sourceHTML.replace(pattern, "");
+    const DOM = new JSDOM(HTML);
+    this.document = DOM.window.document; 
   }
 
-  async Stripping() {
-
-  }
-
-  async MetaImage() {
+  async metaImage() {
     const pattern = /<meta\s+property="og:image"\s+content="(.+?)"/i;
     const match = HTML.match(pattern);
     const imageUrl = match && match[1];
     return imageUrl
   };
 
-  async Content() {
+  async mainContent() {
+    const paragraphs = document.querySelectorAll('p');
     for (let i = 0; i < paragraphs.length; i++) {
       let paragraph = paragraphs[i];
       let text = paragraph.textContent;
@@ -44,7 +36,7 @@ class Extractor {
     }
   };
 
-  async Title() {
+  async pageTitle() {
     return(document.title)
   };
 
