@@ -7,9 +7,16 @@ class TechCrunchCrawler{
     this.browser = null;
   }
 
-  location = '../../content'
+  /** 
+   * A folder path where to save requested HTML pages.
+   */
+  location = 'octo-packages/public'
   
+  /**
+   * Chromium startup arguments
+   */
   args = [
+    "--headless=new",
     "--disable-background-timer-throttling",
     "--disable-backgrounding-occluded-windows",
     "--disable-ipc-flooding-protection",
@@ -19,6 +26,9 @@ class TechCrunchCrawler{
     "--disable-blink-features=AutomationControlled",
   ];
 
+  /**
+   * TechCrunch topic paths for easy navigation.
+   */
   topics = {
     ai: '/category/artificial-intelligence/',
     crypto: '/category/cryptocurrency/',
@@ -51,6 +61,7 @@ class TechCrunchCrawler{
     for (let topic in this.topics) {
       await this.crawling(this.topics[topic], topic)
     }
+    await this.browser.close()
   }
 
   /**
@@ -65,7 +76,6 @@ class TechCrunchCrawler{
     fs.writeFile(`${this.location}/${topic}.html`, html, (err) => {
       if (err) throw err;
     });
-    
   };
 };
 
